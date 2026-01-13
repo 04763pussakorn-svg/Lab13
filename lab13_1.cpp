@@ -19,3 +19,39 @@ int main(){
     cout << "Min = " << B[5];
     return 0;
 }
+
+void stat(const double A[], int N, double B[]){
+    double sum = 0.0;
+    double sumsq = 0.0;
+    double prod = 1.0;
+    double invsum = 0.0;
+
+    double max = A[0];
+    double min = A[0];
+
+    for(int i = 0; i < N; i++){
+        sum += A[i];
+        sumsq += A[i] * A[i];
+        prod *= A[i];
+        invsum += 1.0 / A[i];
+
+        if(A[i] > max) max = A[i];
+        if(A[i] < min) min = A[i];
+    }
+
+    // Arithmetic Mean
+    B[0] = sum / N;
+
+    // Standard Deviation (population)
+    B[1] = sqrt( (sumsq / N) - (B[0] * B[0]) );
+
+    // Geometric Mean
+    B[2] = pow(prod, 1.0 / N);
+
+    // Harmonic Mean
+    B[3] = N / invsum;
+
+    // Max / Min
+    B[4] = max;
+    B[5] = min;
+}
